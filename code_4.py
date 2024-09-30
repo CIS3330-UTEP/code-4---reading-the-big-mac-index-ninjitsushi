@@ -5,7 +5,7 @@ big_mac_file = './big-mac-full-index.csv'
 df = pd.read_csv(big_mac_file)
 
 def get_big_mac_price_by_year(year, country_code):
-    YearPriceData = df[(df['year'] == year) & (df['iso_a3'].str.lower() == country_code)] 
+    YearPriceData = df[(df['date'] == year) & (df['iso_a3'].str.lower() == country_code)] 
     ##This line filters data from pandas df by year and price
    
     mean_price = YearPriceData['dollar_price'].mean()    
@@ -29,7 +29,7 @@ def get_big_mac_price_by_country(country_code):
 
 
 def get_the_cheapest_big_mac_price_by_year(year):
-    YearPriceData = df[df('year') == year]
+    YearPriceData = df[df('date') == year]
     ##Filters the data in the df by the year
 
     lowest_price = YearPriceData.loc[YearPriceData['dollar_price'].idxmin()]
@@ -40,7 +40,7 @@ def get_the_cheapest_big_mac_price_by_year(year):
 
 
 def get_the_most_expensive_big_mac_price_by_year(year):
-    YearPriceData = df[df('year') == year]
+    YearPriceData = df[df('date') == year]
     ##Filters the data in the df by the year
 
     highest_price = YearPriceData.loc[YearPriceData['dollar_price'].idxmax()]
@@ -50,4 +50,7 @@ def get_the_most_expensive_big_mac_price_by_year(year):
     ##This line returns the highest price based off of the year, and returns it with 2 decimals.
 
 if __name__ == "__main__":
-    pass # Remove this line and code your user interface
+    print(get_big_mac_price_by_year(2022, 'mex'))  
+    print(get_big_mac_price_by_country('mex'))      
+    print(get_the_cheapest_big_mac_price_by_year(2022))  
+    print(get_the_most_expensive_big_mac_price_by_year(2022))
