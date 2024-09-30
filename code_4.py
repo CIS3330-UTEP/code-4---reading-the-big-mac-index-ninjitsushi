@@ -29,9 +29,13 @@ def get_big_mac_price_by_country(country_code):
 
 
 def get_the_cheapest_big_mac_price_by_year(year):
-    YearPriceData = df[df('date') == year]
+    YearPriceData = df[df['date'] == year]
     ##Filters the data in the df by the year
 
+    if YearPriceData.empty:
+        return f"No data is available for that year {year}."
+    ##The line above checks if there are holes in the data and send a message if that year does not have data collected.
+    
     lowest_price = YearPriceData.loc[YearPriceData['dollar_price'].idxmin()]
     ##This line scans the rows in the df with the .loc and gets the lowest price
 
@@ -40,8 +44,12 @@ def get_the_cheapest_big_mac_price_by_year(year):
 
 
 def get_the_most_expensive_big_mac_price_by_year(year):
-    YearPriceData = df[df('date') == year]
+    YearPriceData = df[df['date'] == year]  #The bug was changing the parenthesis to square brackets
     ##Filters the data in the df by the year
+
+    if YearPriceData.empty:
+        return f"No data is available for that year {year}."
+    ##Checks if the date in the df is empty for that year
 
     highest_price = YearPriceData.loc[YearPriceData['dollar_price'].idxmax()]
     ##This line scans the rows in the df with the .loc and gets the lowest price
